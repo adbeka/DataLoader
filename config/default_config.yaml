@@ -1,0 +1,48 @@
+# Training Configuration for Weed Detection
+
+# Data directories
+data:
+  train_img_dir: "dataset/images/train"
+  train_lbl_dir: "dataset/labels/train"
+  val_img_dir: "dataset/images/val"
+  val_lbl_dir: "dataset/labels/val"
+  test_img_dir: "dataset/images/test"
+  test_lbl_dir: "dataset/labels/test"
+  img_size: [800, 800]  # [width, height]
+
+# Training parameters
+training:
+  num_epochs: 20
+  batch_size: 4
+  num_classes: 2  # background + weed
+  lr: 0.0001
+  lr_scheduler: "cosine"  # cosine or constant
+  weight_decay: 0.0005
+
+# Model parameters
+model:
+  architecture: "faster_rcnn"  # faster_rcnn or yolov8
+  backbone: "mobilenet_v3"  # mobilenet_v3 or resnet50
+  num_classes: 2
+
+# Augmentation
+augmentation:
+  horizontal_flip: 0.5
+  enable_advanced_aug: false  # rotation, blur, brightness, etc.
+
+# Checkpointing
+checkpointing:
+  output_dir: "outputs"
+  save_every_n_epochs: 1
+  keep_best_model: true
+
+# Logging & Tracking
+logging:
+  use_wandb: true
+  wandb_project: "weed-detection"
+  wandb_entity: null  # your wandb username, or null for default
+  log_interval: 10  # log every N batches
+  verbose: true
+
+# Device
+device: "cuda"  # cuda or cpu
